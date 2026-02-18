@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Fetch Notes
+  // Fetch Notes
   const fetchNotes = async () => {
     try {
       const res = await api.get("/notes/getnotes");
@@ -24,7 +24,7 @@ const Dashboard = () => {
     fetchNotes();
   }, []);
 
-  // 🔹 Create Note
+  // Create Note
   const handleAdd = async (e) => {
     e.preventDefault();
     if (!title || !content) return;
@@ -42,7 +42,7 @@ const Dashboard = () => {
     }
   };
 
-  // 🔹 Delete Note
+  // Delete Note
   const handleDelete = async (id) => {
     try {
       await api.delete(`/notes/deletenote/${id}`);
@@ -52,7 +52,7 @@ const Dashboard = () => {
     }
   };
 
-  // 🔹 Update Note
+  // Update Note
   const handleUpdate = async (id, updatedData) => {
     try {
       const res = await api.patch(`/notes/updatenote/${id}`, updatedData);
