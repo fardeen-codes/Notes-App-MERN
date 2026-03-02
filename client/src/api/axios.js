@@ -1,38 +1,25 @@
-// import axios from "axios";
-
-// // axios ka ek custom instance bana rahe hain
-// const api = axios.create({
-//   baseURL: "http://localhost:5000/api",
-// });
-
-// // Request backend jaane se pehle kuch kaam karna
-// api.interceptors.request.use(
-//   (req) => {
-//     const token = localStorage.getItem("token");
-//     if (token) {
-//       req.headers.Authorization = `Bearer ${token}`;
-//     } else {
-//       delete req.headers.Authorization;
-//     }
-//     return req;
-//   },
-//   (error) => Promise.reject(error)
-// );
-
-// export default api;
-
+// Import axios for making HTTP requests
 import axios from "axios";
 
+// Create a custom axios instance with base URL
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "http://localhost:5000/api", // Backend API base URL
 });
 
+// Add a request interceptor
 axiosInstance.interceptors.request.use((config) => {
+  
+  // Get JWT token from localStorage
   const token = localStorage.getItem("token");
+
+  // Attach token to Authorization header if it exists
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  // Return updated config
   return config;
 });
 
+// Export the instance for reuse
 export default axiosInstance;
